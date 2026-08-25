@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI SparkX Challenge 2026 invitation page for GitHub Pages." />
     <title>AI SparkX Challenge 2026 | Invitation</title>
     <style>
       :root {
@@ -10,21 +11,23 @@
         --gold: #d97706;
         --slate: #475569;
         --ink: #0f172a;
-        --surface: rgba(255, 255, 255, 0.7);
-        --surface-strong: rgba(255, 255, 255, 0.9);
-        --border: rgba(255, 255, 255, 0.4);
+        --surface: rgba(255, 255, 255, 0.78);
+        --surface-strong: rgba(255, 255, 255, 0.94);
+        --border: rgba(255, 255, 255, 0.42);
         --shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
         --shadow-soft: 0 10px 20px rgba(15, 23, 42, 0.04);
       }
 
-      * {
-        box-sizing: border-box;
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
         margin: 0;
-        font-family: "Inter", system-ui, sans-serif;
-        background: #f8fafc;
+        font-family: Inter, system-ui, sans-serif;
+        background: linear-gradient(180deg, #f8fafc, #eef2ff);
         color: var(--ink);
         overflow-x: hidden;
       }
@@ -55,10 +58,10 @@
       .video-shell {
         width: min(100vw, 100vw);
         height: 100vh;
-        border-radius: 24px;
+        border-radius: 0;
         overflow: hidden;
         box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 0;
         background: #000;
       }
 
@@ -70,9 +73,13 @@
       }
 
       .video-actions {
-        margin-top: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 28px;
         display: flex;
         justify-content: center;
+        padding: 0 16px;
       }
 
       .video-button {
@@ -86,19 +93,6 @@
         background: linear-gradient(135deg, var(--navy), var(--gold));
         cursor: pointer;
         box-shadow: 0 12px 28px rgba(30, 58, 138, 0.3);
-      }
-
-      @media (min-width: 769px) {
-        .video-actions {
-          display: none;
-        }
-
-        .video-shell {
-          width: 100vw;
-          height: 100vh;
-          border-radius: 0;
-          border: 0;
-        }
       }
 
       .invitation {
@@ -129,49 +123,46 @@
         padding: 38px;
         align-items: start;
       }
-          
-          .sidebar {
-            display: grid;
-            gap: 18px;
-          }
-          
-          .poster-card {
-            background: var(--surface-strong);
-            border-radius: 26px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-soft);
-            overflow: hidden;
-          }
-          
-          .poster-card img {
-            display: block;
-            width: 100%;
-            height: 550px;
-            object-fit: cover;
-            object-position: center top;
-          }
-          
-          .poster-caption {
-            padding: 16px 18px 18px;
-            background: linear-gradient(180deg, #fff, #f8fafc);
-            border-top: 1px solid rgba(30, 58, 138, 0.08);
-          }
-          
-          .poster-caption strong {
-            display: block;
-            color: var(--navy);
-            font-size: 0.9rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-          }
-          
-          .poster-caption p {
-            margin: 0;
-            color: var(--slate);
-            line-height: 1.7;
-            font-size: 0.95rem;
-          }
+
+      .sidebar { display: grid; gap: 18px; }
+
+      .poster-card {
+        background: var(--surface-strong);
+        border-radius: 26px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+      }
+
+      .poster-card img {
+        display: block;
+        width: 100%;
+        height: 550px;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      .poster-caption {
+        padding: 16px 18px 18px;
+        background: linear-gradient(180deg, #fff, #f8fafc);
+        border-top: 1px solid rgba(30, 58, 138, 0.08);
+      }
+
+      .poster-caption strong {
+        display: block;
+        color: var(--navy);
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .poster-caption p {
+        margin: 0;
+        color: var(--slate);
+        line-height: 1.7;
+        font-size: 0.95rem;
+      }
 
       .eyebrow-row {
         display: flex;
@@ -278,10 +269,7 @@
         color: var(--navy);
       }
 
-      .details-list {
-        display: grid;
-        gap: 14px;
-      }
+      .details-list { display: grid; gap: 14px; }
 
       .detail-row {
         display: grid;
@@ -291,11 +279,7 @@
         border-top: 1px solid rgba(30, 58, 138, 0.08);
       }
 
-      .detail-row:first-child {
-        border-top: 0;
-        padding-top: 0;
-      }
-
+      .detail-row:first-child { border-top: 0; padding-top: 0; }
       .detail-label {
         color: var(--slate);
         font-size: 0.82rem;
@@ -303,27 +287,15 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
       }
+      .detail-value { color: var(--ink); font-weight: 700; line-height: 1.6; }
+      .detail-value.accent { color: var(--navy); }
 
-      .detail-value {
-        color: var(--ink);
-        font-weight: 700;
-        line-height: 1.6;
-      }
-
-      .detail-value.accent {
-        color: var(--navy);
-      }
-
-      .footer {
-        padding: 0 38px 38px;
-      }
-
+      .footer { padding: 0 38px 38px; }
       .separator {
         height: 1px;
         background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.16), rgba(217, 119, 6, 0.22), transparent);
         margin-bottom: 22px;
       }
-
       .closing {
         display: grid;
         gap: 10px;
@@ -333,98 +305,43 @@
         padding: 22px 24px;
         box-shadow: 0 18px 34px rgba(30, 58, 138, 0.16);
       }
-
-      .closing p {
-        margin: 0;
-        line-height: 1.8;
-        font-size: 1rem;
-      }
-
-      .signature {
-        margin: 0;
-        font-style: italic;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.92);
-      }
+      .closing p { margin: 0; line-height: 1.8; font-size: 1rem; }
+      .signature { margin: 0; font-style: italic; font-weight: 600; color: rgba(255, 255, 255, 0.92); }
 
       @keyframes rise {
-        from {
-          opacity: 0;
-          transform: translateY(18px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(18px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       @media (max-width: 768px) {
-        .page {
-          padding: 12px;
-        }
-
-        .video-shell {
-          width: 94vw;
-          height: auto;
-          aspect-ratio: 9 / 16;
-          border-radius: 18px;
-          aspect-ratio: 9 / 16;
-        }
-
-        .invitation {
-          border-radius: 22px;
-        }
-
+        .page { padding: 12px; }
+        .video-shell { width: 100vw; height: 100vh; }
+        .video-actions { bottom: 18px; }
+        .invitation { border-radius: 22px; }
         .content {
           grid-template-columns: 1fr;
           gap: 20px;
           padding: 22px 18px 18px;
         }
-        
-        .sidebar {
-          gap: 14px;
-        }
-
-        .footer {
-          padding: 0 18px 18px;
-        }
-
-        .details-card {
-          padding: 18px;
-        }
-
-        .details-heading {
-          font-size: 1.7rem;
-        }
-
-        .detail-row {
-          grid-template-columns: 1fr;
-          gap: 6px;
-        }
-
-        .detail-label {
-          font-size: 0.78rem;
-        }
-
-        h1 {
-          font-size: clamp(2.35rem, 11vw, 4.3rem);
-        }
-
-        .poster-caption p {
-          font-size: 0.92rem;
-        }
+        .sidebar { gap: 14px; }
+        .footer { padding: 0 18px 18px; }
+        .details-card { padding: 18px; }
+        .details-heading { font-size: 1.7rem; }
+        .detail-row { grid-template-columns: 1fr; gap: 6px; }
+        .detail-label { font-size: 0.78rem; }
+        h1 { font-size: clamp(2.35rem, 11vw, 4.3rem); }
+        .poster-card img { height: 420px; }
+        .poster-caption p { font-size: 0.92rem; }
       }
     </style>
   </head>
   <body>
     <section class="video-overlay" id="videoOverlay" aria-label="Intro video">
-      <div>
-        <div class="video-shell">
-          <video id="introVideo" autoplay muted playsinline preload="auto"></video>
-        </div>
-        <div class="video-actions" aria-hidden="true">
-          <button class="video-button" id="skipVideo" type="button">Skip to Invitation</button>
-        </div>
+      <div class="video-shell">
+        <video id="introVideo" autoplay muted playsinline preload="auto"></video>
+      </div>
+      <div class="video-actions" aria-hidden="true">
+        <button class="video-button" id="skipVideo" type="button">Skip to Invitation</button>
       </div>
     </section>
 
@@ -440,20 +357,26 @@
             <h1 id="invitation-title">Cordially Inviting You</h1>
 
             <div class="names" style="display: grid; gap: 14px; margin-top: 24px; margin-bottom: 24px;">
-              <div class="name-chip" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 18px; background: var(--surface-strong); border: 1px solid var(--border); box-shadow: var(--shadow-soft); font-size: 1.05rem;"><strong>Name:</strong> <span id="facultyName">Faculty Name</span></div>
-              <div class="designation-chip" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 18px; background: var(--surface-strong); border: 1px solid var(--border); box-shadow: var(--shadow-soft); font-size: 1.05rem;"><strong>Designation:</strong> <span id="facultyDesignation">Faculty of CSE</span></div>
+              <div class="name-chip" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 18px; background: var(--surface-strong); border: 1px solid rgba(30, 58, 138, 0.14); box-shadow: var(--shadow-soft); font-size: 1.05rem;">
+                <strong style="color: var(--navy);">Name</strong> <span id="facultyName">Faculty Name</span>
+              </div>
+              <div class="designation-chip" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 18px; background: var(--surface-strong); border: 1px solid rgba(30, 58, 138, 0.14); box-shadow: var(--shadow-soft); font-size: 1.05rem;">
+                <strong style="color: var(--navy);">Designation</strong> <span id="facultyDesignation">Faculty of CSE</span>
+              </div>
             </div>
 
             <p class="lead">
-              Thank you for taking the time to review our project. With great respect and enthusiasm, the Department of Computer Science &amp; Engineering warmly invites you to join <strong>AI SparkX Challenge 2026</strong>, an academic celebration of innovation, AI projects, and student creativity.
+              Thank you for taking the time to review our project. With great respect and enthusiasm, the Department of Computer Science &amp; Engineering warmly invites you to join <strong>AI SparkX Challenge 2026</strong>.
             </p>
             <p class="lead" style="margin-top: 16px;">
-              Your expertise, guidance, and constructive feedback are invaluable to our students. By evaluating these projects, you not only provide essential academic evaluation but also inspire our young developers to push the boundaries of modern technology. We truly appreciate your continuous support in shaping the next generation of engineers.
+              Your expertise, guidance, and constructive feedback are invaluable to our students. By evaluating these projects, you not only provide essential academic review but also inspire innovation and learning.
             </p>
 
-
-
-
+            <div class="tags">
+              <div class="tag">Project Review</div>
+              <div class="tag">Academic Event</div>
+              <div class="tag">Innovation Showcase</div>
+            </div>
           </div>
 
           <div class="sidebar">
@@ -483,7 +406,7 @@
               </div>
               <div class="detail-row">
                 <div class="detail-label">Venue</div>
-                <div class="detail-value">Coming Soon...</div>
+                <div class="detail-value">CSE Seminar Hall &amp; AI Labs</div>
               </div>
             </div>
           </aside>
@@ -492,9 +415,7 @@
         <footer class="footer">
           <div class="separator" aria-hidden="true"></div>
           <div class="closing">
-            <p>
-              We look forward to your gracious presence as we celebrate ideas, learning, and the spirit of academic innovation.
-            </p>
+            <p>We look forward to your gracious presence as we celebrate ideas, learning, and the spirit of academic innovation.</p>
             <p class="signature">With sincere regards, Team AI SparkX &amp; CSE Department</p>
           </div>
         </footer>
@@ -505,22 +426,15 @@
       const videoOverlay = document.getElementById('videoOverlay');
       const introVideo = document.getElementById('introVideo');
       const skipVideo = document.getElementById('skipVideo');
-
       const desktopVideo = 'Prompt_A_cinematic_high_spee_gwr_video_mvp.mp4';
       const mobileVideo = 'Buddy_the_video_contains_the_n_gwr_video_mvp.mp4';
-
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       introVideo.src = isMobile ? mobileVideo : desktopVideo;
 
       function tryFullscreen() {
-        if (isMobile) {
-          return;
-        }
-
+        if (isMobile) return;
         const target = document.documentElement;
-        if (target.requestFullscreen) {
-          target.requestFullscreen().catch(() => {});
-        }
+        if (target.requestFullscreen) target.requestFullscreen().catch(() => {});
       }
 
       function revealInvitation() {
@@ -533,29 +447,27 @@
       introVideo.addEventListener('ended', revealInvitation);
       introVideo.addEventListener('error', revealInvitation);
       skipVideo.addEventListener('click', revealInvitation);
-
       introVideo.addEventListener('loadeddata', tryFullscreen, { once: true });
 
       const playAttempt = introVideo.play();
       if (playAttempt && typeof playAttempt.catch === 'function') {
         playAttempt.catch(() => {
-          if (!isMobile) {
-            tryFullscreen();
-          } else {
-            skipVideo.textContent = 'Tap to Start Video';
-          }
+          if (!isMobile) tryFullscreen();
+          else skipVideo.textContent = 'Tap to Start Video';
         });
       }
 
       const facultyNameEl = document.getElementById('facultyName');
       const facultyDesignationEl = document.getElementById('facultyDesignation');
       const invitationTitleEl = document.getElementById('invitation-title');
-      
       const urlParams = new URLSearchParams(window.location.search);
+
       if (urlParams.has('name')) {
         const name = decodeURIComponent(urlParams.get('name')).trim();
-        facultyNameEl.textContent = name;
-        invitationTitleEl.textContent = `Welcome, ${name}`;
+        if (name) {
+          facultyNameEl.textContent = name;
+          invitationTitleEl.textContent = `Welcome, ${name}`;
+        }
       }
       if (urlParams.has('designation') || urlParams.has('role')) {
         facultyDesignationEl.textContent = decodeURIComponent(urlParams.get('designation') || urlParams.get('role')).trim();
