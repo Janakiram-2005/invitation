@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI SparkX Challenge Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@700;800;900&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:ital,wght@0,800;0,900;1,700;1,900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f7f4ff;
+        --ink: #16112c;
+        --muted: #5f5a78;
+        --violet: #5a31d6;
+        --purple: #7b1fa2;
+        --orange: #ff6a00;
+        --pink: #f01f7a;
+        --card: rgba(255, 255, 255, 0.9);
+        --shadow: 0 24px 70px rgba(65, 29, 138, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(122, 44, 255, 0.18), transparent 30%),
+          radial-gradient(circle at top right, rgba(255, 106, 0, 0.12), transparent 26%),
+          linear-gradient(180deg, #fff, var(--bg));
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      .app {
+        min-height: 100vh;
+      }
+
+      .video-stage {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(circle at center, #21114f 0%, #090617 65%, #030208 100%);
+        z-index: 20;
+        transition: opacity 0.7s ease, visibility 0.7s ease;
+      }
+
+      .video-stage.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .video-frame {
+        width: min(92vw, 920px);
+        aspect-ratio: 16 / 9;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: #000;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .skip-btn {
+        margin-top: 18px;
+        padding: 12px 20px;
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--orange), var(--pink));
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        box-shadow: 0 12px 30px rgba(255, 106, 0, 0.35);
+      }
+
+      .invite {
+        position: relative;
+        min-height: 100vh;
+        padding: 28px 18px 42px;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .invite.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .invite::before,
+      .invite::after {
+        content: "";
+        position: fixed;
+        inset: auto;
+        width: 34vw;
+        height: 34vw;
+        border-radius: 50%;
+        filter: blur(24px);
+        opacity: 0.25;
+        z-index: -1;
+      }
+
+      .invite::before {
+        top: -12vw;
+        left: -12vw;
+        background: radial-gradient(circle, rgba(90, 49, 214, 0.55), transparent 62%);
+      }
+
+      .invite::after {
+        right: -12vw;
+        bottom: -12vw;
+        background: radial-gradient(circle, rgba(255, 106, 0, 0.52), transparent 62%);
+      }
+
+      .card {
+        width: min(100%, 920px);
+        background: var(--card);
+        border: 1px solid rgba(98, 50, 190, 0.12);
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+      }
+
+      .hero {
+        display: grid;
+        gap: 22px;
+        grid-template-columns: 1.12fr 0.88fr;
+        padding: 28px;
+        align-items: start;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 244, 255, 0.9)),
+          radial-gradient(circle at top right, rgba(255, 106, 0, 0.12), transparent 30%);
+      }
+
+      .letter-wrap {
+        display: grid;
+        gap: 18px;
+      }
+
+      .letter-header {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo-box {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid rgba(90, 49, 214, 0.12);
+        box-shadow: 0 8px 22px rgba(65, 29, 138, 0.08);
+        flex: 0 0 auto;
+      }
+
+      .logo-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .letter-heading-block {
+        flex: 1 1 280px;
+        min-width: 0;
+      }
+
+      .department {
+        font-size: clamp(0.78rem, 1.4vw, 0.92rem);
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #3b2f6b;
+        margin-bottom: 10px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        width: fit-content;
+        background: rgba(123, 31, 162, 0.08);
+        color: var(--violet);
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+
+      .letter-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.1rem, 5vw, 3.6rem);
+        font-weight: 800;
+        color: #211545;
+        margin: 0;
+        line-height: 1.08;
+      }
+
+      .subtitle {
+        font-size: clamp(1rem, 2.2vw, 1.22rem);
+        color: var(--muted);
+        max-width: 40rem;
+        line-height: 1.65;
+        margin: 0;
+      }
+
+      .names {
+        display: grid;
+        gap: 14px;
+        margin-top: 4px;
+      }
+
+      .name-chip {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        width: fit-content;
+        padding: 12px 18px;
+        border-radius: 18px;
+        background: #fff;
+        border: 1px solid rgba(90, 49, 214, 0.14);
+        box-shadow: 0 8px 18px rgba(66, 24, 125, 0.06);
+        font-size: 1.05rem;
+      }
+
+      .name-chip strong {
+        color: var(--purple);
+      }
+
+      .designation-chip {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        width: fit-content;
+        padding: 12px 18px;
+        border-radius: 18px;
+        background: #fff;
+        border: 1px solid rgba(90, 49, 214, 0.14);
+        box-shadow: 0 8px 18px rgba(66, 24, 125, 0.06);
+        font-size: 1.05rem;
+      }
+
+      .designation-chip strong {
+        color: var(--purple);
+      }
+
+      .letter-paragraph {
+        margin: 0;
+        color: var(--ink);
+        line-height: 1.85;
+        font-size: 1rem;
+      }
+
+      .letter-section {
+        padding: 18px 20px;
+        border-radius: 22px;
+        background: linear-gradient(180deg, #fff, #f9fbff);
+        border: 1px solid rgba(90, 49, 214, 0.12);
+        box-shadow: 0 10px 26px rgba(65, 29, 138, 0.06);
+      }
+
+      .letter-section h2 {
+        margin: 0 0 10px;
+        color: #211545;
+        font-size: 1.08rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .instruction-list {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--ink);
+        line-height: 1.75;
+      }
+
+      .instruction-list li {
+        margin-bottom: 8px;
+      }
+
+      .details {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 0 28px 28px;
+      }
+
+      .detail {
+        padding: 18px;
+        border-radius: 20px;
+        background: linear-gradient(180deg, #fff, #fbf8ff);
+        border: 1px solid rgba(90, 49, 214, 0.12);
+      }
+
+      .detail span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.86rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .detail strong {
+        display: block;
+        font-size: 1.02rem;
+        line-height: 1.45;
+      }
+
+      .message {
+        padding: 0 28px 28px;
+      }
+
+      .message-box {
+        border-radius: 24px;
+        padding: 22px 22px 26px;
+        background:
+          linear-gradient(135deg, rgba(90, 49, 214, 0.95), rgba(255, 106, 0, 0.95));
+        color: #fff;
+        box-shadow: 0 20px 42px rgba(90, 49, 214, 0.28);
+        text-align: center;
+      }
+
+      .message-box h2 {
+        margin: 0 0 10px;
+        font-size: clamp(1.4rem, 3.8vw, 2.1rem);
+      }
+
+      .message-box p {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 52rem;
+        margin-inline: auto;
+      }
+
+      .footer-note {
+        text-align: center;
+        padding: 0 28px 28px;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .flower {
+        display: grid;
+        place-items: center;
+        height: 100%;
+        min-height: 100%;
+        padding: 10px;
+      }
+
+      .hero-image {
+        width: min(100%, 410px);
+        aspect-ratio: 0.78;
+        object-fit: cover;
+        display: block;
+        border-radius: 28px;
+        box-shadow: 0 24px 60px rgba(52, 24, 99, 0.2);
+        border: 1px solid rgba(90, 49, 214, 0.12);
+        background: #fff;
+      }
+
+      @media (max-width: 860px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .details {
+          grid-template-columns: 1fr;
+          padding: 0 18px 18px;
+        }
+
+        .flower {
+          order: -1;
+        }
+
+        .card {
+          border-radius: 22px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .hero,
+        .details,
+        .message,
+        .footer-note {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .hero {
+          padding-top: 22px;
+          padding-bottom: 18px;
+        }
+
+        .detail,
+        .message-box {
+          border-radius: 18px;
+        }
+
+        .video-frame {
+          width: 94vw;
+          border-radius: 16px;
+        }
+
+        .logo-box {
+          width: 60px;
+          height: 60px;
+          border-radius: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <section class="video-stage" id="videoStage" aria-label="Intro video stage">
+        <div>
+          <div class="video-frame">
+            <video id="introVideo" autoplay muted playsinline preload="auto">
+              <source src="Prompt_A_cinematic_high_spee_gwr_video_mvp.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <button class="skip-btn" id="skipBtn" type="button">Skip to Invitation</button>
+        </div>
+      </section>
+
+      <section class="invite" id="inviteSection" aria-label="Invitation section">
+        <article class="card">
+          <div class="hero">
+            <div class="letter-wrap">
+              <div class="letter-header">
+                <div class="logo-box">
+                  <img src="LOOGOO.jpeg" alt="Department logo" />
+                </div>
+                <div class="letter-heading-block">
+                  <div class="department">Department of Computer Science &amp; Engineering</div>
+                  <div class="eyebrow">Faculty Project Review Invitation</div>
+                </div>
+              </div>
+
+              <h1 class="letter-title" id="invitation-title">Welcome, Faculty</h1>
+
+              <div class="names">
+                <div class="name-chip"><strong>Name</strong> <span id="facultyName">Faculty Name</span></div>
+                <div class="designation-chip"><strong>Designation</strong> <span id="facultyDesignation">Faculty of CSE</span></div>
+              </div>
+
+              <p class="subtitle" id="welcomeCopy">Thank you for taking the time to review our project.</p>
+
+              <div class="letter-section">
+                <h2>Invitation Note</h2>
+                <p class="letter-paragraph">
+                  This project was developed as part of an academic initiative. Your review and suggestions are highly valued, and your feedback will contribute to improving the project.
+                </p>
+              </div>
+
+              <div class="letter-section">
+                <h2>Review Instructions</h2>
+                <ul class="instruction-list">
+                  <li>Click the <strong>Open Project</strong> button.</li>
+                  <li>Explore the application and its major features.</li>
+                  <li>Review the user interface, functionality, and overall experience.</li>
+                  <li>Test any modules available in the application.</li>
+                  <li>Return to this page after completing the review.</li>
+                  <li>Submit your valuable feedback through the feedback form.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flower" aria-hidden="true">
+              <img class="hero-image" src="agenticai.png" alt="AI themed invitation artwork" />
+            </div>
+          </div>
+
+          <div class="details">
+            <div class="detail">
+              <span>Event Name</span>
+              <strong>AI SparkX Challenge 2026</strong>
+            </div>
+            <div class="detail">
+              <span>Date</span>
+              <strong>29 August 2026</strong>
+            </div>
+            <div class="detail">
+              <span>Time</span>
+              <strong>09:30 AM – 04:30 PM IST</strong>
+            </div>
+            <div class="detail">
+              <span>Venue</span>
+              <strong>CSE Seminar Hall &amp; AI Labs</strong>
+            </div>
+          </div>
+
+          <div class="message">
+            <div class="message-box">
+              <h2>Open Project</h2>
+              <p>
+                <a href="#" style="color:#fff;text-decoration:underline;font-weight:800;">Open Project</a> to review the application, then return here to submit your feedback.
+              </p>
+            </div>
+          </div>
+
+          <div class="footer-note">
+            With sincere regards, Team AI SparkX &amp; CSE Department
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const videoStage = document.getElementById('videoStage');
+      const inviteSection = document.getElementById('inviteSection');
+      const introVideo = document.getElementById('introVideo');
+      const skipBtn = document.getElementById('skipBtn');
+      const facultyNameEl = document.getElementById('facultyName');
+      const facultyDesignationEl = document.getElementById('facultyDesignation');
+      const welcomeCopyEl = document.getElementById('welcomeCopy');
+      const invitationTitleEl = document.getElementById('invitation-title');
+
+      const params = new URLSearchParams(window.location.search);
+      const name = decodeURIComponent(params.get('name') || 'Faculty Name').trim() || 'Faculty Name';
+      const designation = decodeURIComponent(params.get('designation') || params.get('role') || 'Faculty of CSE').trim() || 'Faculty of CSE';
+
+      facultyNameEl.textContent = name;
+      facultyDesignationEl.textContent = designation;
+      invitationTitleEl.textContent = `Welcome, ${name}`;
+      welcomeCopyEl.textContent = 'Thank you for taking the time to review our project.';
+
+      function showInvite() {
+        videoStage.classList.add('hidden');
+        inviteSection.classList.add('show');
+      }
+
+      introVideo.addEventListener('ended', showInvite);
+      introVideo.addEventListener('error', showInvite);
+      skipBtn.addEventListener('click', showInvite);
+
+      const autoplayPromise = introVideo.play();
+      if (autoplayPromise && typeof autoplayPromise.catch === 'function') {
+        autoplayPromise.catch(() => {
+          skipBtn.textContent = 'Tap to Start Video';
+        });
+      }
+    </script>
+  </body>
+</html>
