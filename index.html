@@ -340,8 +340,7 @@
       <div class="video-shell">
         <video id="introVideo" autoplay muted playsinline preload="auto"></video>
       </div>
-      <div class="video-actions" aria-hidden="true">
-        <button class="video-button" id="skipVideo" type="button">Skip to Invitation</button>
+      <div class="video-actions" aria-hidden="true" style="display: none;">
       </div>
     </section>
 
@@ -425,7 +424,6 @@
     <script>
       const videoOverlay = document.getElementById('videoOverlay');
       const introVideo = document.getElementById('introVideo');
-      const skipVideo = document.getElementById('skipVideo');
       const desktopVideo = 'Prompt_A_cinematic_high_spee_gwr_video_mvp.mp4';
       const mobileVideo = 'Buddy_the_video_contains_the_n_gwr_video_mvp.mp4';
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -446,14 +444,16 @@
 
       introVideo.addEventListener('ended', revealInvitation);
       introVideo.addEventListener('error', revealInvitation);
-      skipVideo.addEventListener('click', revealInvitation);
+      
+      // Allow users to skip by tapping anywhere on the video overlay
+      videoOverlay.addEventListener('click', revealInvitation);
+      
       introVideo.addEventListener('loadeddata', tryFullscreen, { once: true });
 
       const playAttempt = introVideo.play();
       if (playAttempt && typeof playAttempt.catch === 'function') {
         playAttempt.catch(() => {
           if (!isMobile) tryFullscreen();
-          else skipVideo.textContent = 'Tap to Start Video';
         });
       }
 
